@@ -1,0 +1,14 @@
+# Render blueprint. The disk keeps the event log across deploys and restarts.
+services:
+  - type: web
+    name: tax-workpaper
+    runtime: docker
+    plan: starter
+    healthCheckPath: /api/health
+    envVars:
+      - key: DB_PATH
+        value: /data/workpaper.db
+    disk:
+      name: workpaper-data
+      mountPath: /data
+      sizeGB: 1

@@ -1,0 +1,6 @@
+-r requirements.txt
+# test client transport for starlette's TestClient
+httpx2==2.13.0
+ruff==0.6.9
+# browser smoke test (tests/e2e_smoke.py); also run: python -m playwright install chromium
+playwright==1.56.0

@@ -1,0 +1,65 @@
+/* Tailwind entry point. Everything visual lives in utility classes in the components;
+   this file only holds the theme tokens, self-hosted fonts and element defaults. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* IBM Plex, Latin-1 subsets, self-hosted (SIL Open Font License, see /static/fonts/LICENSE.txt).
+   No third-party font requests: this app shows tax data. */
+@font-face { font-family: "IBM Plex Sans"; font-weight: 400; font-display: swap; src: url("/static/fonts/IBMPlexSans-Regular-Latin1.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-weight: 500; font-display: swap; src: url("/static/fonts/IBMPlexSans-Medium-Latin1.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-weight: 600; font-display: swap; src: url("/static/fonts/IBMPlexSans-SemiBold-Latin1.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Sans Condensed"; font-weight: 500; font-display: swap; src: url("/static/fonts/IBMPlexSansCondensed-Medium-Latin1.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Sans Condensed"; font-weight: 600; font-display: swap; src: url("/static/fonts/IBMPlexSansCondensed-SemiBold-Latin1.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Serif"; font-weight: 400; font-display: swap; src: url("/static/fonts/IBMPlexSerif-Regular-Latin1.woff2") format("woff2"); }
+
+@layer base {
+  :root {
+    --ground: 238 241 244; --surface: 255 255 255; --sunk: 246 248 250; --ink: 23 32 42; --muted: 91 102 115; --rule: 213 219 226;
+    --rule-soft: 230 234 238; --evidence: 31 79 180; --evidence-tint: 227 235 251; --verified: 28 124 78; --recalc: 18 122 134;
+    --adjusted: 107 63 191; --adjusted-tint: 239 232 251; --error: 180 35 24; --error-tint: 253 233 231; --warning: 154 103 0;
+    --warning-tint: 253 243 220; --page: 253 253 251; --page-edge: 201 207 214; --on-accent: 255 255 255;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: 18 23 29; --surface: 26 33 41; --sunk: 22 28 35; --ink: 228 233 238; --muted: 154 165 177; --rule: 44 54 64;
+      --rule-soft: 35 44 53; --evidence: 134 169 255; --evidence-tint: 29 42 69; --verified: 76 195 138; --recalc: 70 191 203;
+      --adjusted: 177 148 245; --adjusted-tint: 42 33 64; --error: 255 122 110; --error-tint: 58 30 28; --warning: 229 180 84;
+      --warning-tint: 51 41 26; --page: 30 37 45; --page-edge: 51 64 76; --on-accent: 13 20 32;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: 18 23 29; --surface: 26 33 41; --sunk: 22 28 35; --ink: 228 233 238; --muted: 154 165 177; --rule: 44 54 64;
+    --rule-soft: 35 44 53; --evidence: 134 169 255; --evidence-tint: 29 42 69; --verified: 76 195 138; --recalc: 70 191 203;
+    --adjusted: 177 148 245; --adjusted-tint: 42 33 64; --error: 255 122 110; --error-tint: 58 30 28; --warning: 229 180 84;
+    --warning-tint: 51 41 26; --page: 30 37 45; --page-edge: 51 64 76; --on-accent: 13 20 32;
+    color-scheme: dark;
+  }
+
+  html, body, #app { @apply h-full; }
+  body { @apply bg-ground text-ink font-sans text-base antialiased; }
+  h1 { @apply text-[22px] leading-tight font-semibold tracking-tight mb-2; }
+  h2 { @apply text-base font-semibold mt-6 mb-2; }
+  h3 { @apply text-sm font-semibold mt-4 mb-1.5; }
+  p { @apply my-1.5 max-w-prose; }
+  a { @apply text-evidence; }
+  code { @apply text-xs bg-sunk px-1 py-px rounded-sm; }
+  :focus-visible { @apply outline outline-2 outline-offset-2 outline-evidence; }
+  input:not([type="checkbox"]):not([type="radio"]):not([type="file"]), select, textarea {
+    @apply border border-rule rounded bg-surface px-2 py-[5px] text-ink min-w-0;
+  }
+  input[type="checkbox"], input[type="radio"] { @apply accent-evidence; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+}
+
+@layer utilities {
+  .tabular { font-variant-numeric: tabular-nums; }
+  .clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+}
+
+@media print {
+  .print-hide { display: none !important; }
+  body, #app { height: auto; }
+}

@@ -1,0 +1,7 @@
+var/
+__pycache__/
+*.pyc
+node_modules/
+.venv/
+# built front end (npm run build, or the Docker image builds it)
+static/app/
