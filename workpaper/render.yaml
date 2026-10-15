@@ -5,7 +5,7 @@
 # (A Docker deploy with a persistent disk is also possible: see Dockerfile.)
 services:
   - type: web
-    name: tax-workpaper
+    name: workpaper
     runtime: python
     plan: free
     buildCommand: pip install -r requirements.txt
