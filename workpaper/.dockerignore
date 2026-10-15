@@ -9,3 +9,4 @@ var
 tests
 docs
 *.zip
+*.env

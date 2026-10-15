@@ -4,4 +4,5 @@ __pycache__/
 node_modules/
 .venv/
 # built front end (npm run build, or the Docker image builds it)
-static/app/
+# static/app/
+    

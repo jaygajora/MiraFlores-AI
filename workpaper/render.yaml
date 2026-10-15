@@ -1,14 +1,16 @@
-# Render blueprint. The disk keeps the event log across deploys and restarts.
+# Render blueprint: New -> Blueprint -> pick this repo.
+# Python web service on the free plan. The built front end (static/app/) is committed,
+# so no Node build runs on Render. Free instances sleep after ~15 idle minutes and the
+# demo resets on restart; switch plan to "starter" for an always-on link.
+# (A Docker deploy with a persistent disk is also possible: see Dockerfile.)
 services:
   - type: web
     name: tax-workpaper
-    runtime: docker
-    plan: starter
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /api/health
     envVars:
-      - key: DB_PATH
-        value: /data/workpaper.db
-    disk:
-      name: workpaper-data
-      mountPath: /data
-      sizeGB: 1
+      - key: PYTHON_VERSION
+        value: 3.13.0

@@ -4,7 +4,6 @@ A web-native workpaper for one household's return. It proves where every number 
 
 - **Core idea and data model:** [docs/core-idea.md](docs/core-idea.md)
 - **Errors found and how the design surfaced them:** [docs/errors.md](docs/errors.md)
-- **Walkthrough script, technical decisions and tradeoffs:** [docs/video-script.md](docs/video-script.md)
 
 ## Run it
 
